@@ -3,55 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>tetoteto</title>
     <style>
         body {
             margin: 0;
             background: linear-gradient(
-        to bottom,
-        #8b0000 0%,     
-        #8b0000 25%,
-        #b22222 25%,    
-        #b22222 50%,
-        #ff4500 50%,    
-        #ff4500 75%,
-        #ffcc00 75%,    
-        #ffcc00 100%
-        );
+                to bottom,
+                #8b0000 0%,     
+                #8b0000 25%,
+                #b22222 25%,    
+                #b22222 50%,
+                #ff4500 50%,    
+                #ff4500 75%,
+                #ffcc00 75%,    
+                #ffcc00 100%
+            );
+            font-family: 'Press Start 2P', cursive;
+            color: white;
+            display: flex;
+            flex-direction: column;  
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        video {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        h1 {
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px;
+            max-width: 1200px;
             margin: auto;
-            color: white;
-        
+            width: 100%;
         }
+
+        video {
+            max-width: 50%;
+            height: auto;
+            border-radius: 8px; 
+        }
+
+        .lyrics {
+            flex: 1;
+            max-width: 40%;
+            height: 450px; 
+            overflow: hidden;
+            font-size: 18px;
+            color: black;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 10px;
+            position: relative;
+        }
+
+        .lyrics-inner {
+            position: absolute;
+            width: 100%;
+        }
+        
+        section {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        section h1 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        section .a1 {
+            font-size: 18px;
+            color: rgb(120, 4, 4);
+            font-weight: bold;
+        }
+        section .b {
+            font-size: 16px;
+            color: black;
+        }
+
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const lyricsInner = document.querySelector(".lyrics-inner");
+            const lyricsBox = document.querySelector(".lyrics");
+            const totalDuration = 94; 
+            const fastPhase = 30; 
+            const slowPhase = totalDuration - fastPhase;
+
+            function applyScrollAnimation() {
+                const totalDistance = lyricsInner.scrollHeight + lyricsBox.clientHeight;
+                const fastDistance = totalDistance * 0.5; 
+
+                const keyframes = `
+                    @keyframes scrollDown {
+                        0% { top: ${lyricsBox.clientHeight}px; }
+                        ${(fastPhase / totalDuration) * 100}% { top: ${lyricsBox.clientHeight - fastDistance}px; }
+                        100% { top: -${lyricsInner.scrollHeight}px; }
+                    }
+                `;
+
+                document.querySelectorAll('style[data-dynamic]').forEach(el => el.remove());
+
+                const styleSheet = document.createElement("style");
+                styleSheet.setAttribute("data-dynamic", "true");
+                styleSheet.innerHTML = keyframes;
+                document.head.appendChild(styleSheet);
+
+                lyricsInner.style.animation = 'none';
+                void lyricsInner.offsetWidth; 
+                lyricsInner.style.animation = `scrollDown ${totalDuration}s linear forwards`;
+            }
+
+            applyScrollAnimation();
+
+            setInterval(() => {
+                applyScrollAnimation();
+            }, totalDuration * 1000);
+        });
+    </script>
 </head>
 <body>
     <audio autoplay loop>
         <source src="audio/tetotetoteto.ogg" type="audio/ogg">
     </audio>
 
-    <video autoplay loop muted playsinline>
-        <source src="image/spinnnn.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div class="content">
+        <video autoplay loop muted playsinline>
+            <source src="image/spinnnn.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="lyrics">
+            <div class="lyrics-inner">
+            <p>どうしてすぐ知ってしまうの</p>
+            <p>共振で苦しんでし罵倒</p>
+            <p>Q.更新で降る隕石抹消可？</p>
+            <p>悪くない</p>
+            <p></p>
+            <p>興味ねえ救い派手感動</p>
+            <p>常備ねえ薬食べBAD</p>
+            <p>Q.超酷えフル見た目暗号化？</p>
+            <p>金による</p>
+            <p></p>
+            <p>常識ねえ狂いっぱで乱闘</p>
+            <p>放置ゲーする陰キャでバンド</p>
+            <p>Q.送信で苦しいダメCancelは？</p>
+            <p>草生える</p>
+            <p></p>
+            <p>どうしてすぐ見てしまうの</p>
+            <p>どうしてすぐ言ってしまうの</p>
+            <p>どうしてすぐ壊れちゃうかな</p>
+            <p>（パパラパラパラ）</p>
+            <p></p>
+            <p>近未来しか勝たん ショッピンモールの現代コンピュー</p>
+            <p>小窓(ショーウィンドウ)ﾀﾋか加担 モンティホールの経費でピンボール</p>
+            <p>オイルマッサージ100分コース足湯付き 柚子を添えて</p>
+            <p></p>
+            <p>テテテテトテト</p>
+            <p>テテテテトリス</p>
+            <p>どうしてこんな目に に に</p>
+            <p></p>
+            <p>興味がないこと本気じゃないもの全部後回しで</p>
+            <p>知ってることは知らんぷり 私は終わってる</p>
+            <p>恥ずかしい過去知ってるやつらの記憶消させて</p>
+            <p>迷惑かけてごめんってば ねえ誰か助けて</p>
+            <p></p>
+            <p>興味が出ても本気でやっても全部空回りで</p>
+            <p>知らないくせに嘘つき 私は終わってる</p>
+            <p>恥ずかしい過去知ってるやつらの記憶消させて</p>
+            <p>迷惑かけてごめんってば ねえ誰か助けて</p>
+            <p></p>
+            <p>迷惑かけてごめんってば ねえ誰か許して</p>
+            </div>
+        </div>
+    </div>
+
     <section>
-        <h1>tetoteto</h1>
-        <a href="index.html" class="btn">back</a>
+        <h1>tetetetoris</h1>
+        <p class = "a1">テテテテトリス</p>
+        <p class = "b"> The song is tetoris if you want to know</p>
+        <a href="index.html"  class="a">back</a>
     </section>
-    <h2>
-        どうしてすぐ知ってしまうの？
-共振で苦しんでし罵倒
-「更新で降る隕石 抹消可？」
-悪くない
-    </h2>
 </body>
 </html>
