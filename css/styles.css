@@ -1,0 +1,37 @@
+
+header {
+    
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    
+    background: linear-gradient(#da0000, yellow);
+}   
+body {
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    flex-direction: column; 
+    text-align: center;
+    background: yellow;
+    margin: auto;
+}
+
+main {
+    margin: 10px auto;
+    flex: 1;
+    padding-bottom: 100px;
+}
+
+footer {
+    position: fixed;
+    background: linear-gradient(yellow, #da0000);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    bottom: 0;
+    
+}
